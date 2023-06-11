@@ -1,8 +1,10 @@
 import { Router } from "express";
-import { authUser } from "../controllers/userController.js";
+import { authUser, getUserProfile, logoutUser, registerUser, updateUserProfile } from "../controllers/userController.js";
 
 const route = Router()
 
-route.post('/auth',authUser)
-
+route.post("/", registerUser);
+route.post("/auth", authUser);
+route.post("/logout", logoutUser)
+route.route("/profile").get(getUserProfile).put(updateUserProfile)
 export default route

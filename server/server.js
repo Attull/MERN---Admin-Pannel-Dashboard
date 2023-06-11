@@ -1,6 +1,7 @@
 import express from  "express"
 import dotenv from 'dotenv'
 import route from "./routes/userRoutes.js"
+import { errorHandler, notFound } from "./middleware/errorMiddleware.js"
 dotenv.config()
 
 const app = express()
@@ -11,6 +12,9 @@ app.use("/api/users", route)
 app.get('/',(req, res)=>{
     res.send("Server started")
 })
+
+app.use(notFound)
+app.use(errorHandler)
 
 app.listen(PORT, ()=>{
     console.log(`listen to the PORT ${PORT}`)
